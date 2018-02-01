@@ -38,18 +38,6 @@ public class Launcher
 			}
 		)).start();
 		
-		/* tick(帧事件)，启动器提供的modTick刷新速度较快且不可调整 */
-		GameData.mGameTicker = new Ticker(
-			new Runnable() {
-				public void run() {}
-			}, 2000
-		);
-		
-		/*(GameData.initializationPlugin = new Thread(
-			new Runnable() {
-				public void run() {}
-			}
-		)).start();*/
 	}
 	
 	/* 启动器提供的事件Callback */

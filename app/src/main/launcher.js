@@ -1,7 +1,7 @@
 
 var Boots = {};
 var mContext = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
-var dexpath = "/storage/sdcard0/AppProjects/MCPE_PROJECT/AcademyCity/bin/classes.dex";
+var dexpath = "/storage/sdcard0/AppProjects/Githubs/AcademyCity/app/build/bin/classes.dex";
 
 var loader = new Packages.dalvik.system.DexClassLoader(dexpath, mContext.getDir("dex", 0).getPath(), null, mContext.getClass().getClassLoader());
 function build(name, dir) {
