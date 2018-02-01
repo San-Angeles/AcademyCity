@@ -4,6 +4,7 @@ import android.app.*;
 import android.util.*;
 import com.kokic.ui.library.util.*;
 import com.sanangeles.academycity.kit.*;
+import com.kokic.ui.library.platform.*;
 
 /* 用于提供有关游戏数据的Class */
 public class GameData
@@ -18,8 +19,8 @@ public class GameData
 	/* 游戏内部线程 */
 	public static Thread initializationThread = null;
 	//public static Thread initializationPlugin = null;
-	/* tick(帧事件)，可以调整更新频率 */
-	public static Ticker mGameTicker = null;
+	
+	public static BaseFloat basicWindow = null;
 	
 	/* 打开游戏时的语言类型 */
 	public static String currentLanguage = null;
@@ -28,7 +29,7 @@ public class GameData
 	/* 当前屏幕名称，可以用于监听当前屏幕状态 */
 	public static String currentScreenName = null;
 	
-	public static final String assetsPath = "resource_packs/vanilla/textures/";
+	public static final String assetsPath = "resourcepacks/vanilla/client/textures/";
 	public static String getTexture(String path) {
 		return new StringBuffer(assetsPath).append(path).toString();
 	}

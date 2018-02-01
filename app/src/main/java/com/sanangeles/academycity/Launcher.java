@@ -5,6 +5,9 @@ import com.kokic.ui.library.util.*;
 import com.sanangeles.academycity.interfaces.*;
 import java.lang.reflect.*;
 import com.sanangeles.academycity.kit.*;
+import com.kokic.ui.library.platform.*;
+import com.sanangeles.academycity.kit.gui.*;
+import android.graphics.*;
 
 /* 用于初始化和modpe沟通的Class */
 public class Launcher
@@ -37,6 +40,12 @@ public class Launcher
 				}
 			}
 		)).start();
+		
+		GameData.basicWindow = new BaseFloat(Context, 128, 128);
+		GameData.basicWindow.push(new IButton(128, 128).render());
+		GameData.basicWindow.getLayout().setBackgroundColor(Color.TRANSPARENT);
+		//GameData.basicWindow.setTouchable(false);
+		GameData.basicWindow.show(0, 0);
 		
 	}
 	
@@ -92,6 +101,12 @@ public class Launcher
 
 	public void screenChangeHook(String screenName) {
 		GameData.currentScreenName = screenName;
+		
+		if (screenName.equals("start_screen"))
+			GameData.basicWindow.show(0, 0);
+		else
+			if (GameData.basicWindow.getWindow().isShowing())
+				GameData.basicWindow.dismiss();
 	}
 
 	public void newLevel()

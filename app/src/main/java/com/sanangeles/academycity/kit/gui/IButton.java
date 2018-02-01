@@ -51,9 +51,17 @@ public class IButton extends Button
 	public void setOnTouchListener(View.OnTouchListener l)
 	{}
 	
-	public void setOnTouchCallback(final View.OnTouchListener Callback, Drawable up, Drawable down) {
+	public IButton render() {
+		setOnTouchDrawable(
+			GameData.mBitmapUtils.buildDrawable(GameData.getTexture("gui/newgui/buttons/border/base.png"), 0, 0, 7, 7, 2, 2, 3, 3, width, height),
+			GameData.mBitmapUtils.buildDrawable(GameData.getTexture("gui/newgui/buttons/border/basePress.png"), 0, 0, 7, 7, 2, 2, 3, 3, width, height)
+		);
+		return this;
+	}
+	
+	public void setOnTouchDrawable(Drawable up, Drawable down) {
 		background1 = up;//GameData.mBitmapUtils.buildDrawable(GameData.getTexture("gui/newgui/buttons/border/base.png"), 0, 0, 7, 7, 2, 2, 3, 3, width, height);
-		background2 = down;//GameData.mBitmapUtils.buildDrawable(GameData.getTexture("gui/newgui/buttons/border/basePress.png.png"), 0, 0, 7, 7, 2, 2, 3, 3, width, height);
+		background2 = down;//GameData.mBitmapUtils.buildDrawable(GameData.getTexture("gui/newgui/buttons/border/basePress.png"), 0, 0, 7, 7, 2, 2, 3, 3, width, height);
 		setBackgroundDrawable(background1);
 
 		super.setOnTouchListener(
@@ -68,7 +76,6 @@ public class IButton extends Button
 						setBackground(background2);
 						setTextColor(Color.WHITE);
 					}
-					Callback.onTouch(v, event);
 					return false;
 				}
 			}

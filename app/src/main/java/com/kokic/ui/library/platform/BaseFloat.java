@@ -12,25 +12,18 @@ public class BaseFloat
 {
 	protected Activity context;
 	protected PopupWindow window;
-	protected LinearLayout layout;
+	protected AbsoluteLayout layout;
 
-	protected boolean isUsing = false;
-	
 	public BaseFloat(Activity Context, int width, int height)
 	{
 		context = Context;
 		window = new PopupWindow(width, height);
-		layout = new LinearLayout(Context);
-		layout.setBackgroundColor(Color.WHITE);
+		layout = new AbsoluteLayout(Context);
 		window.setContentView(layout);
 	}
 
 	public BaseFloat(Activity Context) {
 		this(Context, Context.getResources().getDisplayMetrics().widthPixels, Context.getResources().getDisplayMetrics().heightPixels);
-	}
-
-	public boolean isUsing() {
-		return isUsing;
 	}
 
 	public void setbackground(Bitmap bmp) {
@@ -64,14 +57,24 @@ public class BaseFloat
 	public void push(View v, int width, int height) {
 		this.layout.addView(v, width, height);
 	}
+	
+	public void push(View v, int width, int height, int x, int y) {
+		this.layout.addView(v, new AbsoluteLayout.LayoutParams(width, height, x, y));
+	}
 
 	public void setTouchable(boolean able) {
 		this.window.setTouchable(able);
 	}
 
 	public void dismiss() {
-		this.isUsing = false;
-		this.window.dismiss();
+		context.runOnUiThread(
+			new Runnable() {
+				@Override
+				public void run() {
+					window.dismiss();
+				}
+			}
+		);
 	}
 
 	public void show() {
@@ -80,31 +83,33 @@ public class BaseFloat
 
 	public void show(final int arg2,final int arg4)  {
 		final PopupWindow tag = this.window;
-		this.isUsing = true;
-		context.runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				tag.showAtLocation(context.getWindow().getDecorView(),Gravity.LEFT|Gravity.TOP,arg2,arg4);
+		context.runOnUiThread(
+			new Runnable() {
+				@Override
+				public void run() {
+					tag.showAtLocation(context.getWindow().getDecorView(),Gravity.LEFT|Gravity.TOP,arg2,arg4);
+				}
 			}
-		});
+		);
 	}
 
 	public void show(final int gravity,final int x,final int y) {
 		final PopupWindow tag = this.window;
-		this.isUsing = true;
-		context.runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				tag.showAtLocation(context.getWindow().getDecorView(), gravity, x, y);
+		context.runOnUiThread(
+			new Runnable() {
+				@Override
+				public void run() {
+					tag.showAtLocation(context.getWindow().getDecorView(), gravity, x, y);
+				}
 			}
-		});
+		);
 	}
 
 	public PopupWindow getWindow() {
 		return window;
 	}
 
-	public LinearLayout getLayout() {
+	public AbsoluteLayout getLayout() {
 		return layout;
 	}
 }
