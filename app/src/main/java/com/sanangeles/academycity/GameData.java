@@ -5,6 +5,8 @@ import android.media.*;
 import android.util.*;
 import com.kokic.ui.library.platform.*;
 import com.kokic.ui.library.util.*;
+import com.sanangeles.academycity.kit.entity.player.*;
+import com.sanangeles.academycity.kit.item.*;
 
 public class GameData
 {
@@ -21,12 +23,14 @@ public class GameData
 	public static BaseFloat mGameWindow = null;
 	
 	public static String currentLanguage = null;
-	
 	public static String currentMinecraftVersion = null;
-	
 	public static String currentScreenName = null;
 	
+	public static EntityWrapper player;
+	
 	public static MediaPlayer mMediaPlayer = new MediaPlayer();
+	
+	public static final ItemInstance mEmptyItemInstance = new ItemInstance(0, 0, 0);
 	
 	public static final String assetsPath = "resourcepacks/vanilla/client/textures/";
 	

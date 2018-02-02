@@ -99,7 +99,7 @@ public final class Launcher
 	}
 
 	public final void newLevel() {
-		Player.player = Launcher.header.evaluate("getPlayerEnt()");
+		GameData.player = new EntityWrapper(Launcher.header.evaluate("getPlayerEnt()"));
 	}
 
 	public final void selectLevelHook()

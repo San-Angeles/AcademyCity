@@ -12,35 +12,35 @@ public final class InventoryScreen
 	public static final String screenName1 = "survival_inventory_screen";
 	public static final String screenName2 = "creative_inventory_screen";
 	
-	public static Popuper clearItemPopuper;
+	public static Popuper basePopuper;
 	public static IButton clearItemButton;
 
 	public final static void initialization() {
+		basePopuper = new Popuper(clearItemButton, UIAdapter.dip2px(48), UIAdapter.dip2px(48));
 		clearItemButton = new IButton(UIAdapter.dip2px(48), UIAdapter.dip2px(48)).render();
-		clearItemPopuper = new Popuper(clearItemButton, UIAdapter.dip2px(48), UIAdapter.dip2px(48));
 		
 		clearItemButton.setOnClickListener(
 			new OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					Player.clearCarriedItem();
+					GameData.player.clearCarriedItem();
 				}
 			}
 		);
 	}
 	
 	public final static void onInventoryScreen(int type) {
-		if (!clearItemPopuper.getPopupWindow().isShowing())
-			clearItemPopuper.show(0, UIAdapter.dip2px(48));
+		if (!basePopuper.getPopupWindow().isShowing())
+			basePopuper.show(0, UIAdapter.dip2px(48));
 	}
 	
 	public final static void elseScreen() {
-		if (clearItemPopuper.getPopupWindow().isShowing())
+		if (basePopuper.getPopupWindow().isShowing())
 			GameData.MinecraftActivity.runOnUiThread(
 				new Runnable() {
 					@Override
 					public void run() {
-						clearItemPopuper.getPopupWindow().dismiss();
+						basePopuper.getPopupWindow().dismiss();
 					}
 				}
 			);
