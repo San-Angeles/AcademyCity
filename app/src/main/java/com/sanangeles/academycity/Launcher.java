@@ -41,11 +41,11 @@ public class Launcher
 			}
 		)).start();
 		
-		GameData.basicWindow = new BaseFloat(Context, 128, 128);
-		GameData.basicWindow.push(new IButton(128, 128).render());
+		GameData.basicWindow = new BaseFloat(Context, 100, 100);
+		GameData.basicWindow.push(new IButton(100, 100).render());
 		GameData.basicWindow.getLayout().setBackgroundColor(Color.TRANSPARENT);
 		//GameData.basicWindow.setTouchable(false);
-		GameData.basicWindow.show(0, 0);
+		GameData.basicWindow.show(100, 100);
 		
 	}
 	
