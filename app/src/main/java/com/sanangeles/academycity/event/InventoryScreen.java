@@ -1,11 +1,11 @@
 package com.sanangeles.academycity.event;
 
+import android.view.*;
+import android.view.View.*;
 import com.sanangeles.academycity.*;
 import com.sanangeles.academycity.gui.*;
-import com.sanangeles.academycity.kit.gui.*;
-import android.view.View.*;
-import android.view.*;
 import com.sanangeles.academycity.kit.entity.player.*;
+import com.sanangeles.academycity.kit.gui.*;
 
 public final class InventoryScreen
 {
@@ -16,8 +16,8 @@ public final class InventoryScreen
 	public static IButton clearItemButton;
 
 	public final static void initialization() {
-		clearItemButton = new IButton((int)UIAdapter.width(96), (int)UIAdapter.height(96)).render();
-		clearItemPopuper = new Popuper(clearItemButton, (int)UIAdapter.width(96), (int)UIAdapter.height(96));
+		clearItemButton = new IButton(UIAdapter.dip2px(48), UIAdapter.dip2px(48)).render();
+		clearItemPopuper = new Popuper(clearItemButton, UIAdapter.dip2px(48), UIAdapter.dip2px(48));
 		
 		clearItemButton.setOnClickListener(
 			new OnClickListener() {
@@ -31,7 +31,7 @@ public final class InventoryScreen
 	
 	public final static void onInventoryScreen(int type) {
 		if (!clearItemPopuper.getPopupWindow().isShowing())
-			clearItemPopuper.show(0, (int)UIAdapter.height(128));
+			clearItemPopuper.show(0, UIAdapter.dip2px(48));
 	}
 	
 	public final static void elseScreen() {

@@ -5,16 +5,24 @@ import android.view.*;
 
 public final class UIAdapter
 {
-	public final static float width(float width) {
-		if (GameData.mDisplayMetrics != null)
-			return (GameData.mDisplayMetrics.widthPixels/1280)*width;
-		return width;
+	public static int dip2px(float dpValue) {
+		float scale = GameData.MinecraftActivity.getResources().getDisplayMetrics().density;
+		return (int) (dpValue * scale + 0.5f);
 	}
-	
-	public final static float height(float height) {
-		if (GameData.mDisplayMetrics != null)
-			return (GameData.mDisplayMetrics.widthPixels/720)*height;
-		return height;
+
+	public final static int sp2px(float spValue) {
+		final float fontScale = GameData.MinecraftActivity.getResources().getDisplayMetrics().scaledDensity;
+		return (int) (spValue * fontScale + 0.5f);
+	}
+
+	public final static int px2dip(float pxValue) {
+		float scale = GameData.MinecraftActivity.getResources().getDisplayMetrics().density;
+		return (int) (pxValue / scale + 0.5f);
+	}
+
+	public final static int px2sp(float pxValue) {
+		final float fontScale = GameData.MinecraftActivity.getResources().getDisplayMetrics().scaledDensity;
+		return (int) (pxValue / fontScale + 0.5f);
 	}
 	
 	public final static View getDecorView() {

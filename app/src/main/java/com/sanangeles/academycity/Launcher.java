@@ -1,14 +1,12 @@
 package com.sanangeles.academycity;
 
 import android.app.*;
-import android.content.res.*;
 import com.kokic.ui.library.platform.*;
 import com.kokic.ui.library.util.*;
 import com.sanangeles.academycity.event.*;
 import com.sanangeles.academycity.interfaces.*;
-import java.lang.reflect.*;
-import java.io.*;
 import com.sanangeles.academycity.kit.entity.player.*;
+import java.lang.reflect.*;
 
 public final class Launcher
 {
