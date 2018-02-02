@@ -23,8 +23,8 @@ public class IButton extends Button
 		
 		super.setOnClickListener(
 			new OnClickListener() {
-				@Override public void onClick(View p1) {
-					Launcher.header.evaluate("Level.playSoundEnt(Player.getEntity(),\"random.click\",1,1)");
+				@Override
+				public void onClick(View p1) {
 					if (clickListener != null)
 						clickListener.onClick(p1);
 				}

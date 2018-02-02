@@ -82,24 +82,22 @@ public class BaseFloat
 	}
 
 	public void show(final int arg2,final int arg4)  {
-		final PopupWindow tag = this.window;
 		context.runOnUiThread(
 			new Runnable() {
 				@Override
 				public void run() {
-					tag.showAtLocation(context.getWindow().getDecorView(),Gravity.LEFT|Gravity.TOP,arg2,arg4);
+					window.showAtLocation(context.getWindow().getDecorView(),Gravity.LEFT|Gravity.TOP,arg2,arg4);
 				}
 			}
 		);
 	}
 
 	public void show(final int gravity,final int x,final int y) {
-		final PopupWindow tag = this.window;
 		context.runOnUiThread(
 			new Runnable() {
 				@Override
 				public void run() {
-					tag.showAtLocation(context.getWindow().getDecorView(), gravity, x, y);
+					window.showAtLocation(context.getWindow().getDecorView(), gravity, x, y);
 				}
 			}
 		);

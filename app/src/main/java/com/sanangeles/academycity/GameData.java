@@ -1,35 +1,35 @@
 package com.sanangeles.academycity;
 
 import android.app.*;
+import android.media.*;
 import android.util.*;
-import com.kokic.ui.library.util.*;
-import com.sanangeles.academycity.kit.*;
 import com.kokic.ui.library.platform.*;
+import com.kokic.ui.library.util.*;
 
-/* 用于提供有关游戏数据的Class */
 public class GameData
 {
-	/* 游戏界面的Activty */
 	public static Activity MinecraftActivity = null;
-	/* 屏幕密度 */
+	
 	public static DisplayMetrics mDisplayMetrics = null;
-	/* 位图绘制工具 */
+	
 	public static BitmapUtils mBitmapUtils = null;
 	
-	/* 游戏内部线程 */
 	public static Thread initializationThread = null;
 	//public static Thread initializationPlugin = null;
 	
 	public static BaseFloat basicWindow = null;
+	public static BaseFloat mGameWindow = null;
 	
-	/* 打开游戏时的语言类型 */
 	public static String currentLanguage = null;
-	/* 游戏版本号 */
+	
 	public static String currentMinecraftVersion = null;
-	/* 当前屏幕名称，可以用于监听当前屏幕状态 */
+	
 	public static String currentScreenName = null;
 	
+	public static MediaPlayer mMediaPlayer = new MediaPlayer();
+	
 	public static final String assetsPath = "resourcepacks/vanilla/client/textures/";
+	
 	public static String getTexture(String path) {
 		return new StringBuffer(assetsPath).append(path).toString();
 	}

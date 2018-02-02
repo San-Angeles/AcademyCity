@@ -2,14 +2,13 @@ package com.sanangeles.academycity;
 
 import java.io.*;
 
-public class Runner
+public final class Runner
 {
-	/* 调用这个方法并输入标签可以获取到BlockLauncher ModpeApi中的值 */
-	public static Object returnObject(String label) {
+	public final static Object returnObject(String label) {
 		return Launcher.header.evaluate("(function(){return " + label + "})()");
 	}
 	
-	public static String reader(String filePath){
+	public final static String reader(String filePath){
 		String str = "";
 		try {
 			String encoding = "GBK";

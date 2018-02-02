@@ -1,6 +1,6 @@
 package com.sanangeles.academycity.interfaces;
 
-public interface Header
+public final interface Header
 {
-	Object evaluate(String str)
+	final Object evaluate(String str)
 }

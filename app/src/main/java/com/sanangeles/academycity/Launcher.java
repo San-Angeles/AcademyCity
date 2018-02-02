@@ -1,130 +1,122 @@
 package com.sanangeles.academycity;
 
 import android.app.*;
+import android.content.res.*;
+import com.kokic.ui.library.platform.*;
 import com.kokic.ui.library.util.*;
+import com.sanangeles.academycity.event.*;
 import com.sanangeles.academycity.interfaces.*;
 import java.lang.reflect.*;
-import com.sanangeles.academycity.kit.*;
-import com.kokic.ui.library.platform.*;
-import com.sanangeles.academycity.kit.gui.*;
-import android.graphics.*;
+import java.io.*;
+import com.sanangeles.academycity.kit.entity.player.*;
 
-/* 用于初始化和modpe沟通的Class */
-public class Launcher
+public final class Launcher
 {
-	/* 用来实现java call js 的接口 */
 	public static Header header;
 	
-	/* 初始化的方法 */
-	public void initialization(final Activity Context, InvocationHandler handler)
+	public final void initialization(final Activity Context, InvocationHandler handler)
 	{
-		/* 对Context进行赋值， MinecraftActivity即为游戏界面的Activty */
 		GameData.MinecraftActivity = Context;
-		/* 一些屏幕密度信息，便于获取宽高像素 */
 		GameData.mDisplayMetrics = Context.getResources().getDisplayMetrics();
-		/* 位图绘制工具 */
 		GameData.mBitmapUtils = new BitmapUtils(Context);
 		
-		/* 通过反射使接口生效 */
 		header = (Header)Proxy.newProxyInstance(getClass().getClassLoader(), new Class[]{Header.class}, handler);
 		
-		/* 游戏内部线程，处理一些常规操作 */
 		(GameData.initializationThread = new Thread(
 			new Runnable() {
 				public void run() {
-					/* 通过modpe获取当前语言类型 */
 					GameData.currentLanguage = header.evaluate("ModPE.getLanguage()").toString();
-					/* 通过modpe获取当前游戏版本号 */
 					GameData.currentMinecraftVersion = header.evaluate("ModPE.getMinecraftVersion()").toString();
-					
 				}
 			}
 		)).start();
 		
-		GameData.basicWindow = new BaseFloat(Context, 100, 100);
-		GameData.basicWindow.push(new IButton(100, 100).render());
-		GameData.basicWindow.getLayout().setBackgroundColor(Color.TRANSPARENT);
-		//GameData.basicWindow.setTouchable(false);
-		GameData.basicWindow.show(100, 100);
+		InventoryScreen.initialization();
+		
+		GameData.mGameWindow = new BaseFloat(Context);
 		
 	}
 	
-	/* 启动器提供的事件Callback */
-	
-	public void attackHook(long attacker, long victim)
+	public final void attackHook(long attacker, long victim)
 	{}
 
-	public void chatHook(String str)
+	public final void chatHook(String str)
 	{}
 
-	public void continueDestroyBlock(int x, int y, int z, int side, int progress)
+	public final void continueDestroyBlock(int x, int y, int z, int side, int progress)
 	{}
 
-	public void destroyBlock(int x, int y, int z, int side)
+	public final void destroyBlock(int x, int y, int z, int side)
 	{}
 
-	public void projectileHitEntityHook(long projectile, long targetEntity)
+	public final void projectileHitEntityHook(long projectile, long targetEntity)
 	{}
 
-	public void eatHook(int hearts, Object saturationRatio)
+	public final void eatHook(int hearts, Object saturationRatio)
 	{}
 
-	public void entityAddedHook(long entity)
+	public final void entityAddedHook(long entity)
 	{}
 
-	public void entityHurtHook(long attacker, long victim, int halfhearts)
+	public final void entityHurtHook(long attacker, long victim, int halfhearts)
 	{}
 
-	public void entityRemovedHook(long entity)
+	public final void entityRemovedHook(long entity)
 	{}
 
-	public void explodeHook(long entity, int x, int y, int z, int power, boolean onFire)
+	public final void explodeHook(long entity, int x, int y, int z, int power, boolean onFire)
 	{}
 
-	public void leaveGame()
+	public final void leaveGame()
 	{}
 
-	public void serverMessageReceiveHook(String str)
+	public final void serverMessageReceiveHook(String str)
 	{}
 
-	public void deathHook(long attacker, long victim)
+	public final void deathHook(long attacker, long victim)
 	{}
 
-	public void playerAddExpHook(long player, int experienceAdded)
+	public final void playerAddExpHook(long player, int experienceAdded)
 	{}
 
-	public void playerExpLevelChangeHook(long player, int levelsAdded)
+	public final void playerExpLevelChangeHook(long player, int levelsAdded)
 	{}
 
-	public void redstoneUpdateHook(int x, int y, int z, int newCurrent, boolean inPlace, int blockId, int blockData)
+	public final void redstoneUpdateHook(int x, int y, int z, int newCurrent, boolean inPlace, int blockId, int blockData)
 	{}
 
-	public void screenChangeHook(String screenName) {
-		GameData.currentScreenName = screenName;
-		
-		if (screenName.equals("start_screen"))
-			GameData.basicWindow.show(0, 0);
-		else
-			if (GameData.basicWindow.getWindow().isShowing())
-				GameData.basicWindow.dismiss();
+	public final void screenChangeHook(String screenName) {
+		switch (GameData.currentScreenName = screenName) {
+			case InventoryScreen.screenName1:
+				InventoryScreen.onInventoryScreen(0);
+			break;
+			case InventoryScreen.screenName2:
+				InventoryScreen.onInventoryScreen(1);
+			break;
+			
+			default: {
+				InventoryScreen.elseScreen();
+			}
+		}
 	}
 
-	public void newLevel()
+	public final void newLevel() {
+		Player.player = Launcher.header.evaluate("getPlayerEnt()");
+	}
+
+	public final void selectLevelHook()
 	{}
 
-	public void selectLevelHook()
+	public final void startDestroyBlock(int x, int y, int z, int side)
 	{}
 
-	public void startDestroyBlock(int x, int y, int z, int side)
+	public final void projectileHitBlockHook(long projectile, int blockX, int blockY, int blockZ, int side)
 	{}
 
-	public void projectileHitBlockHook(long projectile, int blockX, int blockY, int blockZ, int side)
+	public final void modTick()
 	{}
 
-	public void modTick()
-	{}
-
-	public void useItem(int x, int y, int z, int itemid, int blockid, int side, int itemDamage, int blockDamage)
+	public final void useItem(int x, int y, int z, int itemid, int blockid, int side, int itemDamage, int blockDamage)
 	{}
 	
 }
