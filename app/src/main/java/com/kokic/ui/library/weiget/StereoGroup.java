@@ -456,7 +456,7 @@ public class StereoGroup extends ViewGroup
 
         }
         if (itemId < 0 || itemId > (getChildCount() - 1)) {
-            throw new IndexOutOfBoundsException("请输入规定范围内item位置号");
+            throw new IndexOutOfBoundsException("Input valid startScreen id, please!");
 
         }
         if (itemId > mCurScreen) {

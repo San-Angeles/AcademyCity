@@ -23,8 +23,8 @@ public final class Launcher
 		(GameData.initializationThread = new Thread(
 			new Runnable() {
 				public void run() {
-					GameData.currentLanguage = header.evaluate("ModPE.getLanguage()").toString();
-					GameData.currentMinecraftVersion = header.evaluate("ModPE.getMinecraftVersion()").toString();
+					GameData.currentLanguage = header.evaluate(Runner.add(Runner.getClassName(), "getLanguage()")).toString();
+					GameData.currentMinecraftVersion = header.evaluate(Runner.add(Runner.getClassName(), "getMinecraftVersion()")).toString();
 				}
 			}
 		)).start();

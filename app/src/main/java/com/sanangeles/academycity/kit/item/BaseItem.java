@@ -20,16 +20,16 @@ public class BaseItem
 		this.iconIndex = iconIndex;
 		this.name = name;
 		
-		Launcher.header.evaluate("ModPE.setItem(" + id + ",\"" + icon + "\"," + iconIndex + ",\"" + name + "\"," + stack + ")");
+		Runner.evaluate(Runner.getClassName(), "setItem(", id, ",\"", icon, "\",", iconIndex, ",\"", name, "\",", stack, ")");
 	}
 	
 	public BaseItem setCategory(int type) {
-		Launcher.header.evaluate("Item.setCategory(" + id + "," + type + ")");
+		Runner.evaluate(getClassName(), "setCategory(", id, ",", type, ")");
 		return this;
 	}
 	
 	public BaseItem setStackedByData(boolean able) {
-		Launcher.header.evaluate("Item.setStackedByData(" + id + "," + able + ")");
+		Runner.evaluate(getClassName(), "setStackedByData(", id, ",", able, ")");
 		return this;
 	}
 	
@@ -47,7 +47,7 @@ public class BaseItem
 
 	public void setName(String name) {
 		this.name = name;
-		Launcher.header.evaluate("ModPE.langEdit(\"" + getInternalName() + "\",\"" + getName() + "\")");
+		Runner.evaluate(Runner.getClassName(), "langEdit(\"", getInternalName(), "\",\"", getName(), "\")");
 	}
 
 	public String getName() {
@@ -56,5 +56,9 @@ public class BaseItem
 	
 	public String getInternalName() {
 		return new StringBuffer("item.").append(name).append(".name").toString();
+	}
+	
+	public final static String getClassName() {
+		return "Item.";
 	}
 }
