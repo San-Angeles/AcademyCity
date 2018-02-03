@@ -8,6 +8,10 @@ public class HudScreen
 	
 	}
 	
+	public final static void onHudScreen() {
+		
+	}
+	
 	public final static void elseScreen()
 	{}
 }

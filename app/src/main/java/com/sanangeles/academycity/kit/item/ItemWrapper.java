@@ -11,17 +11,17 @@ public class ItemWrapper
 	}
 	
 	public ItemWrapper setHandEquipped(boolean able) {
-		Runner.evaluate(BaseItem.getClassName(), "setHandEquipped(" + this.id + "," + able + ")");
+		Runner.evaluate(BaseItem.getClassName(), "setHandEquipped(", this.id, ",", able, ")");
 		return this;
 	}
 	
 	public ItemWrapper setProperties(String object) {
-		Runner.evaluate(BaseItem.getClassName(), "setProperties(" + this.id + "," + object + ")");
+		Runner.evaluate(BaseItem.getClassName(), "setProperties(" , this.id, ",", object, ")");
 		return this;
 	}
 	
 	public ItemWrapper turnFood(int repair) {
-		setProperties("{\"use_animation\":\"eat\",\"use_duration\":32,\"food\":{\"nutrition\":" + repair + ",\"saturation_modifier\":\"normal\"," + "\"is_meat\":false}}");
+		setProperties(Runner.add("{\"use_animation\":\"eat\",\"use_duration\":32,\"food\":{\"nutrition\":", repair, ",\"saturation_modifier\":\"normal\",", "\"is_meat\":false}}"));
 		return this;
 	}
 }

@@ -1,5 +1,9 @@
 package com.sanangeles.academycity.kit.item;
 
+import com.sanangeles.academycity.*;
+import com.sanangeles.academycity.kit.item.*;
+import com.sanangeles.academycity.kit.entity.player.*;
+
 public final class ItemInstance
 {
 	private final int id;
@@ -30,5 +34,13 @@ public final class ItemInstance
 
 	public int getData() {
 		return data;
+	}
+	
+	public final static void addItemCreative(int id, int count, int data) {
+		Runner.evaluate(Player.getClassName(), "addItemCreativeInv(", id, ",", count, ",", data, ")");
+	}
+	
+	public final static void addItemSurvival(int id, int count, int data) {
+		Runner.evaluate(Player.getClassName(), "addItemInventory(", id, ",", count, ",", data, ")");
 	}
 }

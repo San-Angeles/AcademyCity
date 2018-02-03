@@ -1,11 +1,12 @@
 package com.sanangeles.academycity;
 
 import java.io.*;
+import android.widget.*;
 
 public final class Runner
 {
 	public final static String add(Object... params) {
-		StringBuilder mStringBuilder = new StringBuilder(params[0]);
+		StringBuilder mStringBuilder = new StringBuilder((String)params[0]);
 		for (int i = 1; i < params.length; ++i)
 			mStringBuilder.append(params[i]);
 		return mStringBuilder.toString();
@@ -17,6 +18,21 @@ public final class Runner
 	
 	public final static Object evaluate(Object... params) {
 		return Launcher.header.evaluate(add(params));
+	}
+	
+	public final static void print(final String messages) {
+		print(messages, 0);
+	}
+	
+	public final static void print(final String messages, final int t) {
+		GameData.MinecraftActivity.runOnUiThread(
+			new Runnable() {
+				@Override
+				public void run() {
+					Toast.makeText(GameData.MinecraftActivity, messages, t).show();
+				}
+			}
+		);
 	}
 	
 	public final static String reader(String filePath){

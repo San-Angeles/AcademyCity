@@ -25,9 +25,7 @@ public final class UIAdapter
 		return (int) (pxValue / fontScale + 0.5f);
 	}
 	
-	public final static View getDecorView() {
-		if (GameData.MinecraftActivity != null)
-			return GameData.MinecraftActivity.getWindow().getDecorView();
-		else return null;
+	public static View getDecorView() {
+		return GameData.MinecraftActivity.getWindow().getDecorView();
 	}
 }

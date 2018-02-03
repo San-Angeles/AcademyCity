@@ -17,18 +17,18 @@ public class Popuper
 		this.show(Gravity.CENTER | Gravity.CENTER, 0, 0);
 	}
 
-	public void show(final int arg2,final int arg4)  {
+	public void show(final int arg2, final int arg4)  {
 		GameData.MinecraftActivity.runOnUiThread(
 			new Runnable() {
 				@Override
 				public void run() {
-					mPopupWindow.showAtLocation(UIAdapter.getDecorView(), Gravity.LEFT|Gravity.TOP,arg2,arg4);
+					mPopupWindow.showAtLocation(UIAdapter.getDecorView(), Gravity.LEFT|Gravity.TOP, arg2, arg4);
 				}
 			}
 		);
 	}
 
-	public void show(final int gravity,final int x,final int y) {
+	public void show(final int gravity, final int x, final int y) {
 		GameData.MinecraftActivity.runOnUiThread(
 			new Runnable() {
 				@Override

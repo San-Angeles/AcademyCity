@@ -1,9 +1,10 @@
 package com.sanangeles.academycity;
 
 import android.app.*;
-import com.kokic.ui.library.platform.*;
 import com.kokic.ui.library.util.*;
+import com.sanangeles.academycity.core.*;
 import com.sanangeles.academycity.event.*;
+import com.sanangeles.academycity.gui.*;
 import com.sanangeles.academycity.interfaces.*;
 import com.sanangeles.academycity.kit.entity.player.*;
 import java.lang.reflect.*;
@@ -23,16 +24,17 @@ public final class Launcher
 		(GameData.initializationThread = new Thread(
 			new Runnable() {
 				public void run() {
-					GameData.currentLanguage = header.evaluate(Runner.add(Runner.getClassName(), "getLanguage()")).toString();
-					GameData.currentMinecraftVersion = header.evaluate(Runner.add(Runner.getClassName(), "getMinecraftVersion()")).toString();
+					GameData.currentLanguage = Runner.evaluate(Runner.getClassName(), "getLanguage()").toString();
+					GameData.currentMinecraftVersion = Runner.evaluate(Runner.getClassName(), "getMinecraftVersion()").toString();
 				}
 			}
 		)).start();
 		
 		InventoryScreen.initialization();
+		HudScreen.initialization();
 		
-		GameData.mGameWindow = new BaseFloat(Context);
-		
+		Items.initialization();
+		//GameData.mGameWindow = new BaseFloat(Context);
 	}
 	
 	public final void attackHook(long attacker, long victim)
@@ -84,18 +86,17 @@ public final class Launcher
 	{}
 
 	public final void screenChangeHook(String screenName) {
-		switch (GameData.currentScreenName = screenName) {
-			case InventoryScreen.screenName1:
-				InventoryScreen.onInventoryScreen(0);
-			break;
-			case InventoryScreen.screenName2:
-				InventoryScreen.onInventoryScreen(1);
-			break;
+		GameData.currentScreenName = screenName;
+		
+		if (screenName.equals(InventoryScreen.screenName2))
+			InventoryScreen.onInventoryScreen(1);
+		else
+			InventoryScreen.elseScreen();
 			
-			default: {
-				InventoryScreen.elseScreen();
-			}
-		}
+		if (screenName.equals(HudScreen.screenName))
+			HudScreen.onHudScreen();
+		else
+			HudScreen.elseScreen();
 	}
 
 	public final void newLevel() {

@@ -16,14 +16,15 @@ public final class InventoryScreen
 	public static IButton clearItemButton;
 
 	public final static void initialization() {
-		basePopuper = new Popuper(clearItemButton, UIAdapter.dip2px(48), UIAdapter.dip2px(48));
 		clearItemButton = new IButton(UIAdapter.dip2px(48), UIAdapter.dip2px(48)).render();
+		basePopuper = new Popuper(clearItemButton, UIAdapter.dip2px(48), UIAdapter.dip2px(48));
 		
+		clearItemButton.setText("Tab");
 		clearItemButton.setOnClickListener(
 			new OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					GameData.player.clearCarriedItem();
+					
 				}
 			}
 		);
@@ -35,7 +36,7 @@ public final class InventoryScreen
 	}
 	
 	public final static void elseScreen() {
-		if (basePopuper.getPopupWindow().isShowing())
+		if (basePopuper.getPopupWindow().isShowing()) {
 			GameData.MinecraftActivity.runOnUiThread(
 				new Runnable() {
 					@Override
@@ -44,6 +45,7 @@ public final class InventoryScreen
 					}
 				}
 			);
+		}
 	}
 	
 	public final static int getGameMode(String screenName) {
