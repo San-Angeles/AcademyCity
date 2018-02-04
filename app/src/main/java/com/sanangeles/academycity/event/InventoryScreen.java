@@ -20,6 +20,7 @@ public final class InventoryScreen
 		basePopuper = new Popuper(clearItemButton, UIAdapter.dip2px(48), UIAdapter.dip2px(48));
 		
 		clearItemButton.setText("Tab");
+		clearItemButton.setTextSize(12);
 		clearItemButton.setOnClickListener(
 			new OnClickListener() {
 				@Override
