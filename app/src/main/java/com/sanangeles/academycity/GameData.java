@@ -37,4 +37,12 @@ public class GameData
 	public static String getTexture(String path) {
 		return new StringBuffer(assetsPath).append(path).toString();
 	}
+	
+	public static final void preventDefault() {
+		Launcher.header.evaluate("preventDefault()");
+	}
+	
+	public static final String getClassName() {
+		return "Level.";
+	}
 }

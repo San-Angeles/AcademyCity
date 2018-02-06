@@ -6,6 +6,7 @@ import com.sanangeles.academycity.*;
 import com.sanangeles.academycity.gui.*;
 import com.sanangeles.academycity.kit.entity.player.*;
 import com.sanangeles.academycity.kit.gui.*;
+import com.sanangeles.academycity.kit.item.*;
 
 public final class InventoryScreen
 {
@@ -25,13 +26,14 @@ public final class InventoryScreen
 			new OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					
+					GameData.player.clearCarriedItem();
 				}
 			}
 		);
 	}
 	
 	public final static void onInventoryScreen(int type) {
+		
 		if (!basePopuper.getPopupWindow().isShowing())
 			basePopuper.show(0, UIAdapter.dip2px(48));
 	}

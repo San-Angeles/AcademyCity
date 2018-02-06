@@ -4,7 +4,6 @@ import android.app.*;
 import com.kokic.ui.library.util.*;
 import com.sanangeles.academycity.core.*;
 import com.sanangeles.academycity.event.*;
-import com.sanangeles.academycity.gui.*;
 import com.sanangeles.academycity.interfaces.*;
 import com.sanangeles.academycity.kit.entity.player.*;
 import java.lang.reflect.*;
@@ -88,6 +87,11 @@ public final class Launcher
 	public final void screenChangeHook(String screenName) {
 		GameData.currentScreenName = screenName;
 		
+		if (screenName.equals(MainScreen.screenName))
+			MainScreen.elseScreen();
+		
+		if (screenName.equals(InventoryScreen.screenName1))
+			InventoryScreen.onInventoryScreen(0);
 		if (screenName.equals(InventoryScreen.screenName2))
 			InventoryScreen.onInventoryScreen(1);
 		else

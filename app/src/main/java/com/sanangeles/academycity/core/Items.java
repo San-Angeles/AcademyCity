@@ -8,10 +8,10 @@ public final class Items
 	public static ItemWrapper mTie;
 	
 	public static final void initialization() {
-		mCoin = new ItemWrapper(new BaseItem(600, "coin", 1)); //游戏币
+		mCoin = new ItemWrapper(new BaseItem(600, "coin", 1));
 		ItemInstance.addItemCreative(600, 1, 0);
 		
-		mTie = new ItemWrapper(new BaseItem(601, "tie", 1));  //铁矢
+		mTie = new ItemWrapper(new BaseItem(601, "tie", 1));
 		ItemInstance.addItemCreative(601, 1, 0);
 	}
 }
