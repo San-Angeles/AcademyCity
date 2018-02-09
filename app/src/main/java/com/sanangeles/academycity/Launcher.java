@@ -1,12 +1,18 @@
 package com.sanangeles.academycity;
 
 import android.app.*;
+import android.os.*;
 import com.kokic.ui.library.util.*;
 import com.sanangeles.academycity.core.*;
 import com.sanangeles.academycity.event.*;
 import com.sanangeles.academycity.interfaces.*;
+import com.sanangeles.academycity.kit.*;
 import com.sanangeles.academycity.kit.entity.player.*;
+import com.sanangeles.academycity.kit.render.*;
 import java.lang.reflect.*;
+import java.util.*;
+import com.sanangeles.academycity.kit.entity.*;
+import com.sanangeles.academycity.kit.item.*;
 
 public final class Launcher
 {
@@ -20,20 +26,59 @@ public final class Launcher
 		
 		header = (Header)Proxy.newProxyInstance(getClass().getClassLoader(), new Class[]{Header.class}, handler);
 		
-		(GameData.initializationThread = new Thread(
+		Looper.prepare();
+		GameData.mRenderTicker = new Ticker(
 			new Runnable() {
 				public void run() {
-					GameData.currentLanguage = Runner.evaluate(Runner.getClassName(), "getLanguage()").toString();
-					GameData.currentMinecraftVersion = Runner.evaluate(Runner.getClassName(), "getMinecraftVersion()").toString();
+					try {
+						if (GameData.inGame)
+							renderTick();
+					} catch (Exception e) {
+						displayDialog(collection(e.getStackTrace()));
+					}
 				}
 			}
-		)).start();
+		, 500);
 		
-		InventoryScreen.initialization();
+		GameData.currentLanguage = Runner.evaluate(Runner.getClassName(), "getLanguage()").toString();
+		GameData.currentMinecraftVersion = Runner.evaluate(Runner.getClassName(), "getMinecraftVersion()").toString();
+		
+		MainScreen.initialization();
 		HudScreen.initialization();
+		InventoryScreen.initialization();
 		
 		Items.initialization();
+		
 		//GameData.mGameWindow = new BaseFloat(Context);
+	
+	}
+	
+	public static void displayDialog(final String e) {
+		GameData.MinecraftActivity.runOnUiThread(
+			new Runnable() {
+				public void run() {
+					new AlertDialog.Builder(GameData.MinecraftActivity)
+						.setTitle("Exception")
+						.setMessage(e)
+						.show();
+				}
+			}
+		);
+	}
+	
+	public static String collection(Object[] list) {
+		StringBuilder str = new StringBuilder();
+		for (Object e : list) {
+			str.append(e);
+			str.append("\n");
+		}
+		return str.toString();
+	}
+	
+	public final void renderTick() {
+		//ParticleProducer.spawn(0x20, GameData.player.getX(), GameData.player.getY(), GameData.player.getZ(), 1, 1, 1, 2);
+		//ParticleProducer.circle(0x20, GameData.player.getPos(), new Group<Double>(1d, 1d, 1d), 10, 2f);
+		
 	}
 	
 	public final void attackHook(long attacker, long victim)
@@ -66,8 +111,9 @@ public final class Launcher
 	public final void explodeHook(long entity, int x, int y, int z, int power, boolean onFire)
 	{}
 
-	public final void leaveGame()
-	{}
+	public final void leaveGame() {
+		GameData.inGame = false;
+	}
 
 	public final void serverMessageReceiveHook(String str)
 	{}
@@ -104,7 +150,13 @@ public final class Launcher
 	}
 
 	public final void newLevel() {
+		GameData.inGame = true;
 		GameData.player = new EntityWrapper(Launcher.header.evaluate("getPlayerEnt()"));
+	
+		if (GameData.mRenderTicker.isStarted())
+			GameData.mRenderTicker.start();
+
+		//displayDialog(collection(new Object[] {GameData.player.getX(), GameData.player.getY(), GameData.player.getZ()}));
 	}
 
 	public final void selectLevelHook()
@@ -119,7 +171,14 @@ public final class Launcher
 	public final void modTick()
 	{}
 
-	public final void useItem(int x, int y, int z, int itemid, int blockid, int side, int itemDamage, int blockDamage)
-	{}
+	public final void useItem(int x, int y, int z, int itemid, int blockid, int side, int itemDamage, int blockDamage) {
+		/*EntityWrapper ent;
+		for(int i = 0; i < 360; ++i) {
+			double sin = Math.sin(i * Math.PI / 180) * 10;
+			double cos = Math.cos(i * Math.PI / 180) * 10;
+			ent = new EntityWrapper(ItemEntity.spawn(new Group<Double>((double)x+sin, (double)y, (double)z+cos), 2, new ItemInstance(itemid, itemDamage)));
+			ent.setImmobile(true);
+		}*/
+	}
 	
 }

@@ -49,11 +49,11 @@ public final class EntityWrapper
 	}
 
 	public final String getMobSkin() {
-		return (String)Runner.evaluate(getClassName(), "getItemEntityData(", data, ")");
+		return (String)Runner.evaluate(getClassName(), "getMobSkin(", data, ")");
 	}
 
 	public final String getNameTag() {
-		return (String)Runner.evaluate(getClassName(), "getItemEntityId(", data, ")");
+		return (String)Runner.evaluate(getClassName(), "getNameTag(", data, ")");
 	}
 	
 	public final double getPitch() {
@@ -65,11 +65,11 @@ public final class EntityWrapper
 	}
 
 	public final EntityWrapper getRider() {
-		return new EntityWrapper(Runner.evaluate(getClassName(), "getItemEntityData(", data, ")"));
+		return new EntityWrapper(Runner.evaluate(getClassName(), "getRider(", data, ")"));
 	}
 
 	public final EntityWrapper getTarget() {
-		return new EntityWrapper(Runner.evaluate(getClassName(), "getItemEntityId(", data, ")"));
+		return new EntityWrapper(Runner.evaluate(getClassName(), "getTarget(", data, ")"));
 	}
 	
 	public final Object getUniqueId() {
@@ -88,16 +88,20 @@ public final class EntityWrapper
 		return Runner.evaluate(getClassName(), "getVelZ(", data, ")");
 	}
 
-	public final int getX() {
+	public final double getX() {
 		return Runner.evaluate(getClassName(), "getX(", data, ")");
 	}
 
-	public final int getY() {
-		return Runner.evaluate(getClassName(), "getItemEntityData(", data, ")");
+	public final double getY() {
+		return Runner.evaluate(getClassName(), "getY(", data, ")");
 	}
 
-	public final int getZ() {
+	public final double getZ() {
 		return Runner.evaluate(getClassName(), "getZ(", data, ")");
+	}
+	
+	public final Group<Double> getPos() {
+		return new Group<Double>(getX(), getY(), getZ());
 	}
 	
 	public final ItemInstance getCarriedItem() {
@@ -115,6 +119,26 @@ public final class EntityWrapper
 		Runner.evaluate(getClassName(), "setCarriedItem(", data, ",", itemInstance.getId(), ",", itemInstance.getCount(), ",", itemInstance.getData(), ")");
 	}
 	
+	public final void setVelX(double val) {
+		Runner.evaluate(getClassName(), "setVelX(", data, ",", val, ")");
+	}
+
+	public final void setVelY(double val) {
+		Runner.evaluate(getClassName(), "setVelY(", data, ",", val, ")");
+	}
+
+	public final void setVelZ(double val) {
+		Runner.evaluate(getClassName(), "setVelZ(", data, ",", val, ")");
+	}
+	
+	public final void setImmobile(boolean able) {
+		Runner.evaluate(getClassName(), "setImmobile(", data, ",", able, ")");
+	}
+	
+	public final void setPosition(double x, double y, double z) {
+		Runner.evaluate(getClassName(), "setPosition(", data, ",", x, ",", y, ",", z, ")");
+	}
+
 	public final void remove() {
 		Runner.evaluate(getClassName(), "remove(", data, ")");
 	}

@@ -7,6 +7,7 @@ import com.kokic.ui.library.platform.*;
 import com.kokic.ui.library.util.*;
 import com.sanangeles.academycity.kit.entity.player.*;
 import com.sanangeles.academycity.kit.item.*;
+import com.sanangeles.academycity.kit.*;
 
 public class GameData
 {
@@ -16,8 +17,7 @@ public class GameData
 	
 	public static BitmapUtils mBitmapUtils = null;
 	
-	public static Thread initializationThread = null;
-	//public static Thread initializationPlugin = null;
+	public static Ticker mRenderTicker = null;
 	
 	public static BaseFloat basicWindow = null;
 	public static BaseFloat mGameWindow = null;
@@ -26,7 +26,8 @@ public class GameData
 	public static String currentMinecraftVersion = null;
 	public static String currentScreenName = null;
 	
-	public static EntityWrapper player;
+	public static EntityWrapper player = null;
+	public static volatile boolean inGame = false;
 	
 	public static MediaPlayer mMediaPlayer = new MediaPlayer();
 	

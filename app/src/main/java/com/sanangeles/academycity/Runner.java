@@ -5,6 +5,13 @@ import android.widget.*;
 
 public final class Runner
 {
+	public final static String CHAR_1 = "{";
+	public final static String CHAR_2 = "}";
+	public final static String CHAR_3 = "{}";
+	public final static String CHAR_4 = "(";
+	public final static String CHAR_5 = ")";
+	public final static String CHAR_6 = "()";
+	
 	public final static String add(Object... params) {
 		StringBuilder mStringBuilder = new StringBuilder((String)params[0]);
 		for (int i = 1; i < params.length; ++i)
@@ -20,6 +27,19 @@ public final class Runner
 		return Launcher.header.evaluate(add(params));
 	}
 	
+	public final static String wrapper(String className, String name, Object... params) {
+		StringBuilder mStringBuilder = new StringBuilder(className);
+		mStringBuilder.append(name);
+		mStringBuilder.append("(");
+		for (int i = 0; i < params.length; ++i) {
+			mStringBuilder.append(params[i]);
+			if (i < params.length-1)
+				mStringBuilder.append(",");
+		}
+		mStringBuilder.append(")");
+		return mStringBuilder.toString();
+	}
+	
 	public final static void print(final String messages) {
 		print(messages, 0);
 	}
@@ -33,6 +53,10 @@ public final class Runner
 				}
 			}
 		);
+	}
+	
+	public final static void exitWorld() {
+		evaluate(getClassName(), "leaveGame", CHAR_6);
 	}
 	
 	public final static String reader(String filePath){
