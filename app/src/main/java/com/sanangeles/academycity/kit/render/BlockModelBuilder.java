@@ -7,4 +7,7 @@ public class BlockModelBuilder
 	public BlockModelBuilder(long pointer) {
 		this.pointer = pointer;
 	}
+	
+	public static void tessellateInWorld(int id, int data, int x, int y, int z)
+	{}
 }

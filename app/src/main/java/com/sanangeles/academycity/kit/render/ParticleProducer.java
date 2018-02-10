@@ -10,12 +10,4 @@ public class ParticleProducer
 		//Launcher.displayDialog(source);
 		Launcher.header.evaluate(source);
 	}
-	
-	public final static void circle(int type, Group<Double> pos, Group<Double> speed, int size, float space) {
-		for(int i = 0; i < 360; ++i) {
-			double Fx = Math.sin(i * 1 / 180 * Math.PI) * space;
-			double Fz = Math.cos(i * 1 / 180 * Math.PI) * space;
-			spawn(type, (Double)pos.get(0)+Fx, (Double)pos.get(1), ((Double)pos.get(2))+Fz, (Double)speed.get(0), (Double)speed.get(1), (Double)speed.get(2), size);
-		}
-	}
 }
